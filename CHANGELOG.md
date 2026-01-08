@@ -10,11 +10,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Implement GRPC Hybrid Query ([#1665](https://github.com/opensearch-project/neural-search/pull/1665))
 
 ### Enhancements
+- [SEISMIC Query Explain]: Enable explain function within Sparse ANN query ([#1694](https://github.com/opensearch-project/neural-search/pull/1694))
 
 ### Bug Fixes
 - [SEISMIC]: Fix the memory usage track upon cache entry creation ([#1701](https://github.com/opensearch-project/neural-search/pull/1701))
 - [HYBRID]: Fix for Hybrid Query with Collapse bugs([#1702](https://github.com/opensearch-project/neural-search/pull/1702))
 - [HYBRID]: Fix position overflow of docIds in HybridBulkScorer to increase search relevance ([#1706](https://github.com/opensearch-project/neural-search/pull/1706))
+- [HYBRiD]: Fix logic of RRF score calculation as per document global rank in the subquery ([#1718](https://github.com/opensearch-project/neural-search/pull/1718))
 
 ### Infrastructure
 
