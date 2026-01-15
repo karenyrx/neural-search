@@ -308,6 +308,18 @@ dependencies {
     testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: "${versions.bytebuddy}"
     testImplementation group: 'org.objenesis', name: 'objenesis', version: "${versions.objenesis}"
     testImplementation group: 'net.bytebuddy', name: 'byte-buddy-agent', version: "${versions.bytebuddy}"
+    // gRPC dependencies for integration tests
+    testImplementation "org.opensearch:protobufs:${versions.opensearchprotobufs}"
+    testImplementation "org.opensearch.plugin:transport-grpc-spi:${opensearch_version}"
+    // gRPC client libraries - these are needed for compilation and runtime
+    testImplementation('io.grpc:grpc-netty-shaded:1.60.1') {
+        // Exclude conflicting dependencies if any
+    }
+    testImplementation 'io.grpc:grpc-api:1.60.1'
+    testImplementation 'io.grpc:grpc-protobuf:1.60.1'
+    testImplementation 'io.grpc:grpc-stub:1.60.1'
+    // Ensure protobuf runtime is available
+    testImplementation 'com.google.protobuf:protobuf-java:3.25.8'
 }
 
 // In order to add the jar to the classpath, we need to unzip the
@@ -396,6 +408,10 @@ integTest {
 
 testClusters.integTest {
     testDistribution = "ARCHIVE"
+
+    // Enable gRPC transport for integration tests
+    // This is required for gRPC integration tests to work
+    setting("aux.transport.types", "[transport-grpc]")
 
     // Optionally install security
     if (System.getProperty("security.enabled") != null && System.getProperty("security.enabled") == "true") {
